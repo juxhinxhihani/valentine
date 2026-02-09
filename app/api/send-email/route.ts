@@ -32,7 +32,7 @@ export async function POST(request: Request) {
 
     const mailOptions = {
       from: user,
-      to: 'juxhinxhihani@gmail.com',
+      to: process.env.RECIPIENT_EMAIL || 'juxhinxhihani@gmail.com',
       subject: subject,
       html: `
         <div style="font-family: Arial, sans-serif; padding: 20px; text-align: center; background-color: #fff0f5;">
