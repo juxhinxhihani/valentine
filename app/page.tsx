@@ -24,14 +24,19 @@ export default function HomePage() {
   }
 
   const handleNoClick = async () => {
-    try {
-      await fetch('/api/send-email', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ message: "She said NO... (first attempt) 😢" }),
-      });
-    } catch (error) {
-      console.error('Failed to send no email:', error);
+    // Only send the "No" email if valid - but user wants only FIRST no.
+    // Check if we already sent a NO email
+    if (!localStorage.getItem('noEmailSent')) {
+      try {
+        await fetch('/api/send-email', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ message: "She pressed No... but maybe she just needs a little more convincing? 😉" }),
+        });
+        localStorage.setItem('noEmailSent', 'true');
+      } catch (error) {
+        console.error('Failed to send no email:', error);
+      }
     }
     router.push("/are-you-sure")
   }

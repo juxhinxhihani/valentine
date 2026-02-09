@@ -50,13 +50,17 @@ export default function ThinkBetterPage() {
   }, [countdown, showFireworks])
 
   const moveNoButton = useCallback(() => {
-    // Optionally log that she tried to click no
+    // Optionally log that she tried to click no - ONLY if not sent before
     if (!hasMoved) {
-      fetch('/api/send-email', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ message: "She tried to click NO on 'Think Better', but it ran away! 🏃💨" }),
-      }).catch(console.error);
+      if (!localStorage.getItem('noEmailSent')) {
+        fetch('/api/send-email', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ message: "She tried to catch the 'No' button on the last page... but it was too fast! 🏃💨" }),
+        }).then(() => {
+          localStorage.setItem('noEmailSent', 'true');
+        }).catch(console.error);
+      }
     }
 
     const x = Math.random() * 200 - 100

@@ -24,14 +24,18 @@ export default function AreYouSurePage() {
   }
 
   const handleNoClick = async () => {
-    try {
-      await fetch('/api/send-email', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ message: `She pressed NO again on 'Are you sure?'... (second attempt) 💔` }),
-      });
-    } catch (error) {
-      console.error('Failed to send sure-no email:', error);
+    // Only send if not sent before
+    if (!localStorage.getItem('noEmailSent')) {
+      try {
+        await fetch('/api/send-email', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ message: "She's playing hard to get... pressed No a second time! 😅" }),
+        });
+        localStorage.setItem('noEmailSent', 'true');
+      } catch (error) {
+        console.error('Failed to send sure-no email:', error);
+      }
     }
     router.push("/think-better")
   }
@@ -55,7 +59,7 @@ export default function AreYouSurePage() {
           </p>
         </div>
 
-        <div className="flex items-center gap-6 animate-fade-in-up" style={{ animationDelay: "0.3s" }}>
+        <div className="flex items-center justify-center gap-6 animate-fade-in-up" style={{ animationDelay: "0.3s" }}>
           <button
             onClick={handleYesClick}
             className="px-10 py-4 text-lg font-bold rounded-full bg-valentine-accent text-valentine-accent-foreground shadow-lg shadow-valentine-accent/30 hover:scale-110 hover:shadow-xl hover:shadow-valentine-accent/40 transition-all duration-300 cursor-pointer"
