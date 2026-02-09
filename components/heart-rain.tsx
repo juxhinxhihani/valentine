@@ -6,15 +6,14 @@ const name = process.env.NEXT_PUBLIC_VALENTINE_NAME || "Ana"
 
 // Short texts for home page rain
 const homeTextItems = [
-  { text: `${name}, say yes?`, color: "#E11D48" },
-  { text: `${name}, di sì?`, color: "#D946EF" },
-  { text: `${name}, thuaj po?`, color: "#F59E0B" },
-  { text: `${name}, sag ja?`, color: "#EC4899" },
-  { text: `${name}, di que sí?`, color: "#F43F5E" },
-  { text: `${name}, dis oui?`, color: "#8B5CF6" },
-  { text: `${name}, 说是?`, color: "#FB923C" },
+  { text: `${name}, say yes!`, color: "#E11D48" },
+  { text: `${name}, di sì!`, color: "#D946EF" },
+  { text: `${name}, thuaj po!`, color: "#F59E0B" },
+  { text: `${name}, sag ja!`, color: "#EC4899" },
+  { text: `${name}, di que sí!`, color: "#F43F5E" },
+  { text: `${name}, dis oui!`, color: "#8B5CF6" },
+  { text: `${name}, 说是!`, color: "#FB923C" },
 ]
-
 // Full question for secondary pages
 const secondaryTextItems = [
   { text: `Will you be my Valentine, ${name}?`, color: "#E11D48" },
