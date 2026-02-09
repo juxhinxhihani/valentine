@@ -49,8 +49,14 @@ function FloatingHearts() {
 
 export default function YesPage() {
   const [show, setShow] = useState(false)
+  const [hesitated, setHesitated] = useState(false)
 
   useEffect(() => {
+    // Check if user clicked No before
+    if (localStorage.getItem('noEmailSent')) {
+      setHesitated(true);
+    }
+
     const timer = setTimeout(() => setShow(true), 200)
 
     // Send email when user lands on yes page
@@ -109,7 +115,7 @@ export default function YesPage() {
           >
             I knew you{"'"}d
             <br />
-            say yes at end!
+            {hesitated ? "say yes at the end!" : "say yes!"}
           </h1>
         </div>
 
@@ -118,6 +124,18 @@ export default function YesPage() {
         </p>
 
         <ValentineCountdown />
+
+        {process.env.NEXT_PUBLIC_VALENTINE_LOCATION_URL && process.env.NEXT_PUBLIC_VALENTINE_LOCATION_URL !== "" && (
+          <a
+            href={process.env.NEXT_PUBLIC_VALENTINE_LOCATION_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="px-10 py-4 text-lg font-bold rounded-full bg-valentine-accent text-valentine-accent-foreground shadow-lg shadow-valentine-accent/30 hover:shadow-xl hover:shadow-valentine-accent/40 hover:-translate-y-1 transition-all duration-300 flex items-center gap-3 mt-6 mb-10"
+          >
+            <span className="text-2xl">📍</span>
+            See Location
+          </a>
+        )}
       </div>
     </main>
   )

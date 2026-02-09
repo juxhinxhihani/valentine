@@ -60,14 +60,15 @@ export function HeartRain({ variant = "home" }: HeartRainProps) {
     } else {
       const textItems = variant === "home" ? homeTextItems : secondaryTextItems
       rainPool = [
-        // Red hearts (majority)
-        ...Array(20).fill({ content: "❤️" }),
+        // Red hearts (majority) - INCREASED DENSITY
+        ...Array(variant === "home" ? 60 : 20).fill({ content: "❤️" }),
         // Colored text messages
         ...textItems.map(item => ({ content: item.text, color: item.color })),
       ]
     }
 
-    const itemCount = variant === "hearts-only" ? 80 : 40
+    // Increased item count for home to show more hearts
+    const itemCount = variant === "hearts-only" ? 80 : (variant === "home" ? 65 : 40)
     const generated: RainItem[] = Array.from({ length: itemCount }, (_, i) => {
       const poolItem = rainPool[Math.floor(Math.random() * rainPool.length)]
       return {

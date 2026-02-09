@@ -17,9 +17,7 @@ export default function ThinkBetterPage() {
 
   const handleYesClick = async () => {
     try {
-      const message = countdownFinished
-        ? "She said YESSSS after the countdown finished! (Think Better -> Time's up) ⏳💖"
-        : "She said YES during the countdown! (Think Better -> Early Yes) ⚡️💖";
+      const message = "She said YES ⚡️💖";
 
       await fetch('/api/send-email', {
         method: 'POST',
